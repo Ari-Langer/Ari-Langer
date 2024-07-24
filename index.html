@@ -1,12 +1,13 @@
 <html><head><base href="https://example.com/"><title>שאלון היכרות ראשוני עם לקוח - משפחה בצמיחה</title><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><script src="https://unpkg.com/react@17.0.2/umd/react.development.js"></script><script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.development.js"></script><script src="https://unpkg.com/@babel/standalone/babel.min.js"></script><script src="https://cdn.tailwindcss.com"></script><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;700&display=swap" rel="stylesheet"><style>
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
+    @keyframes float {
+      0% {
+        transform: translateY(0px);
       }
-      to {
-        opacity: 1;
-        transform: translateY(0);
+      50% {
+        transform: translateY(-10px);
+      }
+      100% {
+        transform: translateY(0px);
       }
     }
     @keyframes shimmer {
@@ -20,7 +21,7 @@
     body {
         font-family: 'Heebo', sans-serif;
         direction: rtl;
-        background-image: url('https://example.com/path-to-your-image.jpg');
+        background-image: url('https://www.canva.com/design/DAGLwPGjyiA/7gzwu4k1vlQm-v11jZYE-w/edit');
         background-size: cover;
         background-position: center;
         background-attachment: fixed;
@@ -52,9 +53,6 @@
         transform: translateY(-2px);
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
-    .fade-in {
-        animation: fadeInUp 0.5s ease-out forwards;
-    }
     .dynamic-title {
         font-size: 2.5rem;
         font-weight: 700;
@@ -63,7 +61,7 @@
         background: linear-gradient(45deg, #4338ca, #6366f1);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
-        animation: shimmer 3s infinite linear;
+        animation: shimmer 3s infinite linear, float 6s ease-in-out infinite;
         background-size: 200% 100%;
     }
 </style></head><body><div id="root"></div><script type="text/babel">
@@ -159,11 +157,11 @@ const ClientQuestionnaire = () => {
 
   return (
     <div className="max-w-4xl mx-auto p-6 form-container my-10">
-      <h1 className="dynamic-title text-center mb-2 fade-in">שאלון היכרות ראשוני עם לקוח</h1>
-      <h2 className="dynamic-title text-center mb-6 fade-in">משפחה בצמיחה</h2>
+      <h1 className="dynamic-title text-center mb-2">שאלון היכרות ראשוני עם לקוח</h1>
+      <h2 className="dynamic-title text-center mb-6">משפחה בצמיחה</h2>
       <form onSubmit={onSubmit}>
         <div className="space-y-6">
-          <h2 className="text-2xl font-semibold text-indigo-600 fade-in">פרטים אישיים - לקוח</h2>
+          <h2 className="text-2xl font-semibold text-indigo-600">פרטים אישיים - לקוח</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <Input name="firstName" label="שם פרטי" required className="input-field" />
             <Input name="lastName" label="שם משפחה" required className="input-field" />
@@ -215,7 +213,7 @@ const ClientQuestionnaire = () => {
           </div>
 
           {maritalStatus === 'married' && (
-            <div className="fade-in">
+            <div>
               <h2 className="text-2xl font-semibold text-indigo-600 mt-8">פרטים אישיים - בן/בת זוג</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <Input name="spouseFirstName" label="שם פרטי" className="input-field" required />
@@ -245,7 +243,7 @@ const ClientQuestionnaire = () => {
           )}
 
           {maritalStatus !== 'single' && (
-            <div className="fade-in">
+            <div>
               <h2 className="text-2xl font-semibold text-indigo-600 mt-8">ילדים</h2>
               <Select
                 name="childrenCount"
@@ -255,7 +253,7 @@ const ClientQuestionnaire = () => {
                 className="input-field"
               />
               {[...Array(childrenCount)].map((_, index) => (
-                <div key={index} className="mt-4 p-4 bg-white rounded-md shadow fade-in">
+                <div key={index} className="mt-4 p-4 bg-white rounded-md shadow">
                   <h3 className="text-lg font-medium text-indigo-600 mb-2">ילד {index + 1}</h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <Input name={`childName${index}`} label="שם הילד" className="input-field" />
@@ -266,7 +264,7 @@ const ClientQuestionnaire = () => {
             </div>
           )}
 
-          <h2 className="text-2xl font-semibold text-indigo-600 mt-8 fade-in">מקורות הכנסה</h2>
+          <h2 className="text-2xl font-semibold text-indigo-600 mt-8">מקורות הכנסה</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <Input name="salaryNet" label="שכר נטו ממוצע (לחודש)" type="number" className="input-field" />
             <Input name="additionalBenefits" label="הטבות נוספות (רכב עבודה/פלאפון...)" className="input-field" />
@@ -274,7 +272,7 @@ const ClientQuestionnaire = () => {
             <Input name="otherIncome" label="הכנסות אחרות" type="number" className="input-field" />
           </div>
 
-          <h2 className="text-2xl font-semibold text-indigo-600 mt-8 fade-in">נכסים והתחייבויות</h2>
+          <h2 className="text-2xl font-semibold text-indigo-600 mt-8">נכסים והתחייבויות</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <Input name="savings" label="חסכונות" type="number" className="input-field" />
             <Input name="investments" label="השקעות" type="number" className="input-field" />
@@ -283,7 +281,7 @@ const ClientQuestionnaire = () => {
             <Input name="mortgage" label="משכנתא" type="number" className="input-field" />
           </div>
 
-          <h2 className="text-2xl font-semibold text-indigo-600 mt-8 fade-in">מטרות פיננסיות</h2>
+          <h2 className="text-2xl font-semibold text-indigo-600 mt-8">מטרות פיננסיות</h2>
           <Textarea
             name="financialGoals"
             label="יעדים, חלומות, מטרות כלכליות ב-10 שנים הקרובות"
